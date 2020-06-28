@@ -1,0 +1,14 @@
+<h1>Current Tournaments</h1>
+<ul>
+<% @tournaments.each do |tournament| %>
+  <li><h2><%= display_game(tournament)%> - <%= link_to tournament.name, tournament_path(tournament) %></h2>
+  <h3>Game: <%= tournament.game_title %></h3>
+  <h3>Prize Pool: <%= tournament.prize_pool %></h3>
+  <h3>Start Date: <%= tournament.start_date %></h3>
+  </li>
+
+<% end %>
+</ul>
+<br>
+<%= link_to "View All Tournaments", tournaments_path %>
+<%= link_to "Sign In", tournaments_path %>

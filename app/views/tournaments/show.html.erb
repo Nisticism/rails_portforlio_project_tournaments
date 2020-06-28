@@ -1,0 +1,10 @@
+<h1><%= link_to @tournament.name, tournament_path(@tournament) %></h1>
+<h3> Game:  <%= display_game(@tournament) %></h3>
+<h3> Start Date: <%= @tournament.start_date %></h3>
+<h3> Prize Pool: <%= @tournament.prize_pool %></h3>
+<h3> Player Count: <%= @tournament.players.count %></h3>
+
+<h3> Participants: </h3>
+<% @tournament.players.each do |player| %>
+<%= link_to player.username, player_path(player) %>
+<% end %>

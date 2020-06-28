@@ -1,0 +1,9 @@
+<h1>All Games</h1>
+<ul>
+<% @games.each do |game| %>
+<li><h2><%= link_to game.title, game_path(game) %></h2>
+<h3><%= game.release_date %></h3>
+<h3><%= game.genre %></h3>
+<% end %>
+</li>
+</ul>
