@@ -1,0 +1,59 @@
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
+
+<% if session[:player_id] == @player.id %>
+<h1>Welcome, <%= @player.username %>!</h1>
+<br>
+<h2>-------- Profile information --------</h2>
+<h2>Name: <%= @player.name %></h2>
+<h2>Email: <%= @player.email %></h2>
+<% end %>
+<h2>Username: <%= @player.username %></h2>
+<%= link_to 'Edit Profile', edit_player_path(@player) %>
+<h2>--------------------------------------------<h2><br>
+
+<h2>Active Tournaments:</h2>
+<ul>
+<% @player.tournaments.each do |tournament| %>
+<li><h3><%= link_to tournament.name, tournament_path(tournament) %></h3>
+<h3>Game: <%= display_game(tournament) %></h3>
+<h3>Start Date: <%= tournament.start_date %></h3>
+<h3>Prize Pool: <%= tournament.prize_pool %></h3></li>
+  <% if session[:player_id] == @player.id %>
+    <%= link_to 'Leave Tournament', player_path(@player, :leave => true, :tournament => tournament) %>
+  <% end %>
+<% end %>
+
+<% if @player.tournaments.length == 0 %>
+  <h4>No tournaments to show</h4>
+<% end %>
+</ul>
+
+<h2>--------------------------------------------<h2><br>
+<h2>Games Played:</h2>
+<ul>
+<% @player.games.uniq.each do |game| %>
+<h3><li>Title: <%= link_to game.title, game_path(game) %></h3>
+<h3>Genre: <%= game.genre %></h3>
+<h3>Release Date: <%= game.release_date %></h3>
+</li>
+<% end %>
+<% if @player.games.length == 0 %>
+ <h4>No games to show</h4>
+<% end %>
+</ul>
+<h2>--------------------------------------------</h2><br>
+
+<% if session[:player_id] != @player.id %>
+<%= link_to "Profile", player_path(Player.find_by(id: session[:player_id])) %>
+<br>
+<% else %>
+<%= link_to "Log out", logout_path %>
+<br>
+<% end %>
+<br>
+<%= link_to 'All Tournaments', tournaments_path %>  |  <%= link_to 'All Games', games_path %>
+

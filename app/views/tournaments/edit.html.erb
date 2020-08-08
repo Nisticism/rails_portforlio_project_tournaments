@@ -1,0 +1,10 @@
+<%= render partial: 'errors', locals: {tournament: @tournament} %>
+
+<h1>Edit <%= @tournament.name %></h1>
+
+<%= render partial: 'form', locals: {tournament: @tournament, button_tag: 'Update Tournament'} %>
+
+<br>
+<%= link_to "All Tournaments", '/' %>
+<br>
+<%= link_to "Profile", player_path(@player) %>

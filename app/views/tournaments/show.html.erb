@@ -1,0 +1,38 @@
+<% flash.each do |type, msg| %>
+  <div class = "flash_error">
+    <%= msg %>
+  </div>
+<% end %>
+
+<h1><%= @tournament.name %></h1>
+<h3> Game:  <%= display_game(@tournament) %></h3>
+<h3> Start Date: <%= @tournament.start_date %></h3>
+<h3> Prize Pool: <%= @tournament.prize_pool %></h3>
+<h3> Player Count: <%= @tournament.players.count %></h3>
+
+<h3> Participants: </h3>
+<% @tournament.players.each do |player| %>
+<%= link_to player.username, player_path(player) %>
+<% end %>
+
+<% if @tournament.players.length == 0 %>
+  <h4>No participants to show</h4>
+<% end %>
+<br><br>
+
+<% if !@tournament.players.include?(@player) %>
+<%= link_to 'Join', tournament_path(@tournament, :join => true) %>
+<br>
+<% else %>
+<%= link_to 'Leave Tournament', tournament_path(@tournament, :leave => true) %>
+<br>
+<% end %>
+<%= link_to 'Edit Tournament', edit_tournament_path(@tournament) %>
+<br>
+<%= link_to 'All Tournaments', tournaments_path %>
+<br>
+<%= link_to "Profile", player_path(@player) %>
+<br>
+<br>
+<%= link_to "Delete Tournament", tournament_path(@tournament), method: :delete %>
+

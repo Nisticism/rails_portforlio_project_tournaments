@@ -1,0 +1,12 @@
+<%= form_for(game) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :release_date %>
+  <%= f.text_field :release_date %>
+
+  <%= f.label :genre %>
+  <%= f.text_field :genre %>
+
+  <%= f.submit %>
+<% end %>

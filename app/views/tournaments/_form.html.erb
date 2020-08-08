@@ -1,0 +1,22 @@
+<%= form_for(tournament) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :start_date %>
+  <%= f.text_field :start_date %>
+
+  <%= f.label :prize_pool %>
+  <%= f.text_field :prize_pool %>
+
+
+  <% if tournament.game_id %>
+    <%= f.collection_select(:game, Game.all, :id, :title, {:selected => tournament.game_id}) %>
+  <% else %>
+    <%= f.collection_select(:game, Game.all, :id, :title, promt: 'Select Game') %>
+  <% end %>
+
+  <br>
+  <br>
+  <%= f.submit button_tag %>
+
+<% end %>

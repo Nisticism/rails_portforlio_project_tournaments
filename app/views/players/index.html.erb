@@ -1,0 +1,13 @@
+<h1>All Players</h1>
+
+<p>
+    <%= text_field_tag :query, params[:query] %>
+    <%= submit_tag "Search", username: nil %>
+</p>
+
+<ul>
+<% @players.each do |player| %>
+<li><h2><%= link_to player.username, player_path(player) %></h2>
+<% end %>
+</li>
+</ul>

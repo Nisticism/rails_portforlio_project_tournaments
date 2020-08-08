@@ -1,0 +1,38 @@
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
+
+<% if @game %>
+  <h1><%= "Current Tournaments for " %><%= link_to "#{@game.title}", game_path(@game) %></h1>
+<% else %>
+  <h1>Current Tournaments</h1>
+<% end %>
+<% if session[:player_id].nil? %>
+<%= link_to "Log In", '/sessions/new' %> | 
+<%= link_to "Sign Up", new_player_path %>
+<% else %>
+<%= link_to "Profile", player_path(@player)%> | 
+<%= link_to "Log out", logout_path %>
+<% end %>
+<ul>
+<% @tournaments.each do |tournament| %>
+  <li><h2><% if !@game %> <%= display_game(tournament)%> - <% end %><%= link_to tournament.name, tournament_path(tournament) %></h2>
+  <h3>Game: <%= tournament.game_title %></h3>
+  <h3>Prize Pool: <%= tournament.prize_pool %></h3>
+  <h3>Start Date: <%= tournament.start_date %></h3>
+  </li>
+
+<% end %>
+
+<% if @tournaments.length == 0 %>
+  <h3> No tournaments to show </h3>
+<% end %>
+</ul>
+<br>
+<% if @game %>
+  <%= link_to "View All Tournaments", tournaments_path %>
+<% end %>
+<br>
+<%= link_to "New Tournament", new_tournament_path %> | <%= link_to "New Game", new_game_path %> | <%= link_to "All Games", games_path %>

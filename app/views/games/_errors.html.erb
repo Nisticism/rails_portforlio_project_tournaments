@@ -1,0 +1,10 @@
+<% if game.errors.any? %>
+  <div id = "error_explanation">
+    <h3><%= pluralize(game.errors.count, "Error") %></h3>
+    <ul>
+      <% game.errors.full_messages.each do |message| %>
+      <li>Error: <%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
