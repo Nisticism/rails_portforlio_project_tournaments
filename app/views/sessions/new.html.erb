@@ -1,10 +1,24 @@
 <%= form_for @player, url: {controller: 'sessions', action: 'create'}, method: 'post' do |f| %>
+
+  <% if @player.errors[:username].empty? %>
+    <div class="field">
+  <% else %>
+    <div class="field_with_errors">
+  <% end %>
   <%= f.label :username %>
   <%= f.text_field :username %>
+  </div>
 
+  <% if @player.errors[:password].empty? %>
+    <div class="field">
+  <% else %>
+    <div class="field_with_errors">
+  <% end %>
   <%= f.label :password %>
   <%= f.password_field :password %>
-    <br>
+  </div>
+
+  <br>
   <%= f.submit "Log In" %>
   <br>
   Or 

@@ -7,6 +7,9 @@ class Tournament < ApplicationRecord
     validates :start_date, :name, :prize_pool, presence: true
     validates :name, uniqueness: true
 
+    scope :major_prize_pool, -> {where("prize_pool > 1000")}
+    scope :future_tournaments, -> (time) {where("start_date > ?", time)}
+
     def game_title
         self.try(:game).try(:title)
     end
@@ -15,5 +18,7 @@ class Tournament < ApplicationRecord
         game = Game.find_or_create_by(title: title)
         self.game = game
     end
+
+
 
 end

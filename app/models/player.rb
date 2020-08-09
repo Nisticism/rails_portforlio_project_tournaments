@@ -11,7 +11,7 @@ class Player < ApplicationRecord
 
     accepts_nested_attributes_for :tournaments, :games
 
-    scope :has_email, -> {where(has_email: true)}
-    # scope :has_matches, -> {where(games.count > 0)}
+    scope :active_player, -> {where("COUNT(tournaments) > 2")}
+    scope :short_username, -> {where("LENGTH(username) < 6")}
 
 end

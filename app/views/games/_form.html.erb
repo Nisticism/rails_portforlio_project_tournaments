@@ -1,12 +1,31 @@
 <%= form_for(game) do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
 
+  <% if game.errors[:title].empty? %>
+    <div class="field">
+  <% else %>
+    <div class="field_with_errors">
+  <% end %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <% if game.errors[:release_date].empty? %>
+    <div class="field">
+  <% else %>
+    <div class="field_with_errors">
+  <% end %>
   <%= f.label :release_date %>
   <%= f.text_field :release_date %>
+  </div>
 
+  <% if game.errors[:genre].empty? %>
+    <div class="field">
+  <% else %>
+    <div class="field_with_errors">
+  <% end %>
   <%= f.label :genre %>
   <%= f.text_field :genre %>
+  </div>
 
   <%= f.submit %>
 <% end %>
