@@ -12,7 +12,9 @@
 <h2>Email: <%= @player.email %></h2>
 <% end %>
 <h2>Username: <%= @player.username %></h2>
-<%= link_to 'Edit Profile', edit_player_path(@player) %>
+<% if session[:player_id] == @player.id %>
+  <%= link_to 'Edit Profile', edit_player_path(@player) %>
+<% end %>
 <h2>--------------------------------------------<h2><br>
 
 <h2>Active Tournaments:</h2>

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   root to: "tournaments#index"
 
-  match '/auth/:provider', to: 'sessions#create_omni', via: [:get, :post]
+  match '/auth/github/callback', to: 'sessions#create', via: [:get, :post]
 
   resource :sessions, only: [:new, :create, :destroy]
 

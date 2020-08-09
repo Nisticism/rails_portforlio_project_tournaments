@@ -7,17 +7,11 @@ class PlayersController < ApplicationController
   
     def create
       @player = Player.new(player_params)
-      if @player.username.nil?
-        redirect_to controller: 'players', action: 'new'
+      if @player.save
+        session[:player_id] = @player.id
+        redirect_to player_path(@player)
       else
-        # Must check if player username is taken
-        if Player.find_by(username: @player.username)
-            redirect_to controller: 'players', action: 'new'
-        else
-            @player.save
-            session[:player_id] = @player.id
-            redirect_to player_path(@player)
-        end
+        render :new
       end
     end
 
@@ -30,6 +24,10 @@ class PlayersController < ApplicationController
         redirect_to player_path(@player)
       end
 
+    end
+
+    def index
+      @players = Player.all
     end
 
     def edit
