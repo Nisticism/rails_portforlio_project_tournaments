@@ -28,6 +28,8 @@ class PlayersController < ApplicationController
 
     def index
       @players = Player.all
+      @players_short_usernames = Player.all.short_username
+      
     end
 
     def edit

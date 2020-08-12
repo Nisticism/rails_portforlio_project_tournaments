@@ -38,8 +38,12 @@ class TournamentsController < ApplicationController
             @tournament = Tournament.new(tournament_params)
         end
 
+        if params[:creator]
+            @tournament.creator = Player.find_by(id: params[:creator].to_i)
+        end
+
+
         if @tournament.save
-            @tournament.save
             redirect_to tournament_path(@tournament)
         else
             render :new
@@ -116,6 +120,6 @@ class TournamentsController < ApplicationController
     end
 
     def tournament_params
-        params.require(:tournament).permit(:name, :game_id, :game_title, :start_date, :prize_pool)
+        params.require(:tournament).permit(:name, :game_id, :game_title, :start_date, :prize_pool, :creator)
     end
 end

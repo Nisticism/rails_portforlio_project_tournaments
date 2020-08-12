@@ -11,3 +11,16 @@
 <% end %>
 </li>
 </ul>
+
+<br><br>
+<h2>Short Username Players</h2>
+
+<ul>
+<% @players_short_usernames.each do |player| %>
+<li><h2><%= link_to player.username, player_path(player) %></h2>
+<% end %>
+</li>
+<% if @players_short_usernames.length == 0 %>
+<h4>No players to show</h4>
+<% end %>
+</ul>

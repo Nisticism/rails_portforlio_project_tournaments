@@ -2,7 +2,7 @@
 
 <h1>Edit <%= @tournament.name %></h1>
 
-<%= render partial: 'form', locals: {tournament: @tournament, button_tag: 'Update Tournament'} %>
+<%= render partial: 'form', locals: {tournament: @tournament, player: @player, button_tag: 'Update Tournament'} %>
 
 <br>
 <%= link_to "All Tournaments", '/' %>

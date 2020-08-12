@@ -1,5 +1,7 @@
 class Player < ApplicationRecord
 
+    has_many :created_tournaments, class_name: "Tournaments"
+
     has_secure_password
 
     validates :name, :username, :password_digest, presence: true
@@ -11,7 +13,6 @@ class Player < ApplicationRecord
 
     accepts_nested_attributes_for :tournaments, :games
 
-    scope :active_player, -> {where("COUNT(tournaments) > 2")}
     scope :short_username, -> {where("LENGTH(username) < 6")}
 
 end

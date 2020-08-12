@@ -11,14 +11,18 @@
 <h3> Player Count: <%= @tournament.players.count %></h3>
 
 <h3> Participants: </h3>
+<ul>
 <% @tournament.players.each do |player| %>
+<li>
 <%= link_to player.username, player_path(player) %>
+</li>
 <% end %>
 
 <% if @tournament.players.length == 0 %>
   <h4>No participants to show</h4>
 <% end %>
-<br><br>
+</ul>
+<br>
 
 <% if !@tournament.players.include?(@player) %>
 <%= link_to 'Join', tournament_path(@tournament, :join => true) %>
@@ -27,8 +31,13 @@
 <%= link_to 'Leave Tournament', tournament_path(@tournament, :leave => true) %>
 <br>
 <% end %>
+
+<% if @tournament.creator == @player %>
 <%= link_to 'Edit Tournament', edit_tournament_path(@tournament) %>
 <br>
+<% end %>
+
+
 <%= link_to 'All Tournaments', tournaments_path %>
 <br>
 <%= link_to "Profile", player_path(@player) %>

@@ -29,8 +29,11 @@ class SessionsController < ApplicationController
 
         player = Player.find_by(username: params[:player][:username])
         player = player.try(:authenticate, params[:player][:password])
-    
-        return redirect_to(controller: 'players', action: 'new') unless player
+        
+        if !player
+          flash[:alert] = "Incorrect username or password."
+          return redirect_to "/sessions/new"
+        end
 
         session[:player_id] = player.id
         session[:username] = player.username

@@ -27,7 +27,7 @@
 
 <%= link_to 'Edit', edit_game_path %>
 <br><br>
-<%= link_to 'Add Tournament', new_tournament_path(:game_id => @game.id)%>
+<%= link_to 'Add Tournament', new_game_tournament_path(:game_id => @game.id)%>
 <br><br>
 <%= link_to "All #{@game.title} Tournaments", game_tournaments_path(@game)%> | <%= link_to 'All Tournaments', tournaments_path %> | <%= link_to 'All Games', games_path %>
 <br><br>

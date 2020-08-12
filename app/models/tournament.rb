@@ -2,7 +2,9 @@ class Tournament < ApplicationRecord
 
     has_many :tournament_signups
     has_many :players, through: :tournament_signups
+
     belongs_to :game
+    belongs_to :creator, class_name: "Player", foreign_key: "player_id"
 
     validates :start_date, :name, :prize_pool, presence: true
     validates :name, uniqueness: true
