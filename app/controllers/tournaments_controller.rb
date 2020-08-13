@@ -72,14 +72,19 @@ class TournamentsController < ApplicationController
     end
 
     def edit
-        if params[:game_id]
-            game = Game.find_by(id: params[:game_id])
-            if game.nil?
-                redirect_to games_path, alert: "Game not found"
-            else
-                @tournament = game.tournaments.find_by(id: params[:id])
-                redirect_to game_tournaments_path(game), alert: "Tournament not found" if @tournament.nil?
+        if @tournament.creator == @player
+            if params[:game_id]
+                game = Game.find_by(id: params[:game_id])
+                if game.nil?
+                    redirect_to games_path, alert: "Game not found"
+                else
+                    @tournament = game.tournaments.find_by(id: params[:id])
+                    redirect_to game_tournaments_path(game), alert: "Tournament not found" if @tournament.nil?
+                end
             end
+        else
+            flash[:alert] = "Must be the tournament creator in order to edit tournaments."
+            redirect_to tournaments_path
         end
     end
     
